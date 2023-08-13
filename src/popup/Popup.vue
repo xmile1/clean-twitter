@@ -1,50 +1,52 @@
 <script setup lang="ts">
-import { storageDemo } from "~/logic/storage";
-const newKeyword = ref("");
+import { storageDemo } from '~/logic/storage'
+import IconDeleteVariant from '~icons/mdi/delete-variant'
+import { useAddKeyword } from '~/composables/useAddKeyword'
+
+const newKeyword = ref('')
+const { addKeyword } = useAddKeyword()
 
 const handleChange = () => {
-  if (!newKeyword.value.trim()) return;
-  // check if it exists
-  if (storageDemo.value.keywords.includes(newKeyword.value.trim())) return;
-
-  storageDemo.value.keywords.unshift(newKeyword.value);
-  newKeyword.value = "";
-};
+  addKeyword(newKeyword.value)
+  newKeyword.value = ''
+}
 
 const handleRemoveKeyword = (index: number) => {
-  storageDemo.value.keywords.splice(index, 1);
-};
-
-const blockedWords = computed(() => {
-  return storageDemo.value.keywords;
-});
+  storageDemo.value.keywords.splice(index, 1)
+}
 </script>
 
 <template>
   <main class="w-[300px] text-gray-700">
     <div class="px-6 py-4 flex items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="clean-icon">
-        <title>delete-variant</title>
-        <path
-          d="M21.03,3L18,20.31C17.83,21.27 17,22 16,22H8C7,22 6.17,21.27 6,20.31L2.97,3H21.03M5.36,5L8,20H16L18.64,5H5.36M9,18V14H13V18H9M13,13.18L9.82,10L13,6.82L16.18,10L13,13.18Z"
-        />
-      </svg>
-      <h1 class="text-base font-bold ml-2">Clean twitter</h1>
+      <IconDeleteVariant class="text-xl" />
+      <h1 class="text-base font-bold ml-2">
+        Clean twitter
+      </h1>
     </div>
-    <hr />
+
+    <hr>
+
     <div class="px-7 pt-4 flex flex-col">
-      <h3 class="text-sm font-bold">Keywords</h3>
+      <h3 class="text-sm font-bold">
+        Keywords
+      </h3>
       <div
-        class="border border-gray100 rounded mt-1 pill-container flex flex-wrap items-start h-160 overflow-auto"
+        class="border border-gray100 rounded mt-1 p-2 flex flex-wrap items-start h-160px overflow-auto"
       >
         <div class="flex flex-wrap items-start overflow-y-auto gap-1">
           <div
-            v-for="(keyword, index) in blockedWords"
+            v-for="(keyword, index) in storageDemo.keywords"
             :key="keyword"
-            class="pill align-self-start break-all"
+            class="pill"
           >
-            {{ keyword
-            }}<button class="close-button" @click="handleRemoveKeyword(index)">&times;</button>
+            {{ keyword }}
+            <button
+              class="cursor-pointer text-base"
+              @click="handleRemoveKeyword(index)"
+            >
+              &times;
+            </button>
           </div>
         </div>
       </div>
@@ -64,41 +66,36 @@ const blockedWords = computed(() => {
         Add keyword
       </button>
     </div>
-    <hr class="my-4" />
+
+    <hr class="my-4">
+
     <div class="px-7 pb-4 flex flex-col">
-      <h3 class="text-sm font-bold">Options</h3>
-      <div class="form-group mt-1 flex gap-2">
+      <h3 class="text-sm font-bold">
+        Options
+      </h3>
+      <div class="mt-1 flex gap-2">
         <input
           id="show-icon"
           v-model="storageDemo.showFloatingIcon"
           type="checkbox"
-          class="text-green-500"
           name="show-icon"
-        />
+        >
         <label for="show-icon">Show floating icon</label>
       </div>
-      <div class="form-group mt-1 flex gap-2">
+      <div class="mt-1 flex gap-2">
         <input
           id="hide-tweet"
           v-model="storageDemo.hideTweetCompletely"
           type="checkbox"
           name="hide-tweet"
-        />
+        >
         <label for="hide-tweet">Hide matched tweet completely</label>
       </div>
-
-      <!-- Uspport mute from home time line  -->
     </div>
   </main>
 </template>
 
 <style scoped>
-.pill-container {
-  height: 160px;
-  overflow: auto;
-  padding: 8px;
-}
-
 .pill {
   display: flex;
   align-items: center;
@@ -106,18 +103,8 @@ const blockedWords = computed(() => {
   border-radius: 12px;
   padding: 0 8px;
   height: min-content;
-}
-
-.close-button {
-  margin-left: 8px;
-  background-color: transparent;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.clean-icon {
-  width: 24px;
+  word-break: break-all;
+  gap: 8px
 }
 
 input[type="checkbox"] {

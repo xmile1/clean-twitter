@@ -1,79 +1,68 @@
 <script setup lang="ts">
-import "uno.css";
-import { hideTweetsWithKeyword } from "../scripts/keywordHider";
-import { storageDemo } from "~/logic/storage";
-const showTurnOffIcon = ref(false);
+import 'uno.css'
+import { hideTweetsWithKeyword } from '../scripts/keywordHider'
+import { storageDemo } from '~/logic/storage'
+import { useAddKeyword } from '~/composables/useAddKeyword'
 
-const toolbarPosition = ref({ top: 0, left: 0 });
-const showToolbar = ref(false);
-const target = ref<HTMLElement>();
-const currentSelectedText = ref("");
+const showTurnOffIcon = ref(false)
+
+const toolbarPosition = ref({ top: 0, left: 0 })
+const showToolbar = ref(false)
+const target = ref<HTMLElement>()
+const currentSelectedText = ref('')
+
+const { addKeyword } = useAddKeyword()
 
 const handleSelection = async (event) => {
   // Get the selected text
-  const selection = window.getSelection();
-  const selectedText = selection.toString();
+  const selection = window.getSelection()
+  const selectedText = selection.toString()
 
   if (selectedText) {
     // Get the range of the selection
-    const range = selection.getRangeAt(0);
-    currentSelectedText.value = selectedText;
+    const range = selection.getRangeAt(0)
+    currentSelectedText.value = selectedText
 
     // Get the position of the selection
-    const rect = range.getBoundingClientRect();
+    const rect = range.getBoundingClientRect()
     const position = {
       left: rect.left + window.scrollX - 24,
       top: rect.top + window.scrollY + 24,
       // width: rect.width,
       // height: rect.height,
-    };
+    }
 
-    toolbarPosition.value = position;
-    await nextTick();
-    showToolbar.value = true;
-
-    // Do something with the selected text and position
-    console.log("Selec", selectedText);
-    console.log("Position:", position);
+    toolbarPosition.value = position
+    await nextTick()
+    showToolbar.value = true
   }
 
   //  if no selection and the element does not contain our element, set to false
-  console.log("event.target, ", event.target, target.value);
-  const toolbar = document.getElementById("vitesse-webext");
+  const toolbar = document.getElementById('vitesse-webext')
   if (!selectedText && toolbar && !toolbar.contains(event.target)) {
     // Handle the click outside event
-    console.log("Clicked outside");
-    showToolbar.value = false;
+    console.log('Clicked outside')
+    showToolbar.value = false
   }
-};
+}
 
 onMounted(() => {
-  document.addEventListener("mouseup", handleSelection);
-});
+  document.addEventListener('mouseup', handleSelection)
+})
 
 watch(
   () => storageDemo.value,
   (keywords) => {
-    console.log("did it watch", keywords);
-    hideTweetsWithKeyword(keywords.keywords, storageDemo.value.hideTweetCompletely);
-  }
-);
+    console.log('did it watch', keywords)
+    hideTweetsWithKeyword(keywords.keywords, storageDemo.value.hideTweetCompletely)
+  },
+)
 
-const handleAddKeyword = (event) => {
-  // const selection = window.getSelection();
-  // if (!selection) return;
-  // const selectedText = selection.toString();
-
-  console.log("selectedText", currentSelectedText.value);
-  if (!currentSelectedText.value) return;
-
-  storageDemo.value.keywords.push(currentSelectedText.value);
-  showToolbar.value = false;
-
-  // get the selection on the screen
-  // if its more than one line do not proceed.
-  // storageDemo.value.keywords.push(value);
-};
+const handleAddKeyword = () => {
+  console.log('currentSelectedText.value', currentSelectedText.value)
+  addKeyword(currentSelectedText.value)
+  showToolbar.value = false
+}
 </script>
 
 <template>
