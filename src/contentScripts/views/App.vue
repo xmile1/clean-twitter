@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import 'uno.css'
-import { hideTweetsWithKeyword } from '../scripts/keywordHider'
+import { initializeTweetObserver } from '../scripts/tweetProcessor'
 import { storageDemo } from '~/logic/storage'
 import { useAddKeyword } from '~/composables/useAddKeyword'
 import IconVolumeMute from '~icons/mdi/volume-mute'
@@ -12,6 +12,13 @@ const showToolbar = ref(false)
 const currentSelectedText = ref('')
 
 const { addKeyword } = useAddKeyword()
+
+watch(
+  () => storageDemo.value,
+  (localStorage) => {
+    initializeTweetObserver(localStorage.keywords, storageDemo.value.hideTweetCompletely)
+  },
+)
 
 const handleTextSelection = async (event: any) => {
   const selection = window.getSelection()
@@ -38,13 +45,6 @@ const handleTextSelection = async (event: any) => {
 onMounted(() => {
   document.addEventListener('mouseup', handleTextSelection)
 })
-
-watch(
-  () => storageDemo.value,
-  (localStorage) => {
-    hideTweetsWithKeyword(localStorage.keywords, storageDemo.value.hideTweetCompletely)
-  },
-)
 
 const handleAddKeyword = () => {
   addKeyword(currentSelectedText.value)
@@ -121,3 +121,4 @@ svg:hover + .tooltip-text {
   visibility: visible;
 }
 </style>
+../scripts/tweetProcessor
