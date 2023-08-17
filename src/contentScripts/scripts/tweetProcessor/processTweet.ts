@@ -1,24 +1,29 @@
 import {
-  hideTweetWithKeyword,
+  hidePeopleToFollowSuggestion,
+  hideSubscriptionSuggesstion,
+  hideTweetWithKeyword, hideTwitterAds,
 
 } from './tweetProcessors'
 
 export interface TweetProcessor {
-  run(element: HTMLElement, options: any): void
+  run(element: HTMLElement, options: any): boolean
 }
 
 class ProcessTweetPipeline {
   private operations: TweetProcessor[] = [
     hideTweetWithKeyword,
+    hideTwitterAds,
+    hidePeopleToFollowSuggestion,
+    hideSubscriptionSuggesstion,
   ]
 
-  public addOperation(operation: TweetProcessor): void {
-    this.operations.push(operation)
-  }
-
-  public run(element: HTMLElement, options: any): void {
-    for (const operation of this.operations)
-      operation.run(element, options)
+  public run(element: HTMLElement, options: any): boolean {
+    for (const operation of this.operations) {
+      const done = operation.run(element, options)
+      if (done)
+        break
+    }
+    return true
   }
 }
 

@@ -40,5 +40,5 @@ export async function initializeTweetObserver(
     .forEach((node: any) => processTweet(node, { keywords, hideTweetCompletely }))
 
   // continue to monitor for new tweets
-  observeTweets(tweetsContainer, keywords, hideTweetCompletely)
+  observeTweets(document.body, keywords, hideTweetCompletely)
 }
