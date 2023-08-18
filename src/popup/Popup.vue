@@ -82,6 +82,7 @@ const handleRemoveKeyword = (index: number) => {
         >
         <label for="show-icon">Show floating icon</label>
       </div>
+
       <div class="mt-1 flex gap-2">
         <input
           id="hide-tweet"
@@ -91,6 +92,47 @@ const handleRemoveKeyword = (index: number) => {
         >
         <label for="hide-tweet">Hide matched tweet completely</label>
       </div>
+
+      <div class="mt-1 flex gap-2">
+        <input
+          id="hide-ads"
+          v-model="storageDemo.hideTwitterAds"
+          type="checkbox"
+          name="hide-ads"
+        >
+        <label for="hide-ads">Hide Ads</label>
+      </div>
+
+      <div class="mt-1 flex gap-2">
+        <input
+          id="hide-ads"
+          v-model="storageDemo.hideTwitterAdsCompletely"
+          type="checkbox"
+          name="hide-ads"
+        >
+        <label for="hide-ads">Hide Ads completely</label>
+      </div>
+
+      <div class="mt-1 flex gap-2">
+        <input
+          id="hide-follow-people"
+          v-model="storageDemo.hidePeopleToFollowSuggestion"
+          type="checkbox"
+          name="hide-follow-people"
+        >
+        <label for="hide-follow-people">Hide People to follow suggestions</label>
+      </div>
+
+      <div class="mt-1 flex gap-2">
+        <input
+          id="hide-subscribe"
+          v-model="storageDemo.hideSubscriptionSuggesstion"
+          type="checkbox"
+          name="hide-subscribe"
+        >
+        <label for="hide-subscribe">Hide Subscribe suggestions</label>
+      </div>
+      <!-- Hide ads completely -->
     </div>
   </main>
 </template>

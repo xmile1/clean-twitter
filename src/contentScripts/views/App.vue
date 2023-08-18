@@ -16,7 +16,7 @@ const { addKeyword } = useAddKeyword()
 watch(
   () => storageDemo.value,
   (localStorage) => {
-    initializeTweetObserver(localStorage.keywords, storageDemo.value.hideTweetCompletely)
+    initializeTweetObserver(localStorage)
   },
 )
 

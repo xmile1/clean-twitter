@@ -10,7 +10,7 @@ const getTweetsContainer = async (): Promise<any> => {
   return getTweetsContainer()
 }
 
-function observeTweets(element: Element, keywords: any, hideTweetCompletely: any): void {
+function observeTweets(element: Element, options: any): void {
   const observer = new MutationObserver((mutations: MutationRecord[]) => {
     mutations.forEach((mutation: MutationRecord) => {
       mutation.addedNodes.forEach((node: Node) => {
@@ -18,7 +18,7 @@ function observeTweets(element: Element, keywords: any, hideTweetCompletely: any
           node.nodeType === Node.ELEMENT_NODE
             && (node as Element).matches('[data-testid="cellInnerDiv"]')
         )
-          processTweet(node as HTMLElement, { keywords, hideTweetCompletely })
+          processTweet(node as HTMLElement, options)
       })
     })
   })
@@ -31,14 +31,13 @@ function observeTweets(element: Element, keywords: any, hideTweetCompletely: any
 }
 
 export async function initializeTweetObserver(
-  keywords: string[],
-  hideTweetCompletely: boolean,
+  options: any,
 ): Promise<void> {
   const tweetsContainer = await getTweetsContainer()
   tweetsContainer
     .querySelectorAll('[data-testid="cellInnerDiv"]')
-    .forEach((node: any) => processTweet(node, { keywords, hideTweetCompletely }))
+    .forEach((node: any) => processTweet(node, options))
 
   // continue to monitor for new tweets
-  observeTweets(document.body, keywords, hideTweetCompletely)
+  observeTweets(document.body, options)
 }

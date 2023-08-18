@@ -5,7 +5,9 @@ interface LocalStorage {
   showFloatingIcon: boolean
   hideTweetCompletely: boolean
   hideTwitterAds: boolean
-  hideTwitterSuggestions: boolean
+  hidePeopleToFollowSuggestion: boolean
+  hideSubscriptionSuggesstion: boolean
+  hideTwitterAdsCompletely: boolean
 }
 
 export const storageDemo = useStorageLocal<LocalStorage>('clean-twitter', {
@@ -13,5 +15,7 @@ export const storageDemo = useStorageLocal<LocalStorage>('clean-twitter', {
   showFloatingIcon: true,
   hideTweetCompletely: false,
   hideTwitterAds: false,
-  hideTwitterSuggestions: false,
+  hidePeopleToFollowSuggestion: false,
+  hideSubscriptionSuggesstion: false,
+  hideTwitterAdsCompletely: false,
 })
