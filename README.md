@@ -12,9 +12,9 @@ Key Features
 All options can found in the extension popup menu.
 
 ## Contributing
-Contributions are welcome! Please open an issue or PR if you would like to contribute.
+Contributions are welcome! Please open an issue or PR if you would like to contribute. 
 
-Adding a new filter is easy, just add a new [tweet processor](src/contentScripts/scripts/tweetProcessor/tweetProcessors.ts) and an [option in the popup](src/popup/Popup.vue) to use it.
+Adding a new filter is easy, Just add a new [tweet processor](src/contentScripts/scripts/tweetProcessor/tweetProcessors.ts) and an [option in the popup](src/popup/Popup.vue) to use it.
 
 ### Development
 

@@ -17,7 +17,7 @@ const handleRemoveKeyword = (index: number) => {
 </script>
 
 <template>
-  <main class="w-[300px] text-gray-700">
+  <main class="w-[360px] text-gray-700">
     <div class="px-6 py-4 flex items-center">
       <IconClean class="text-xl" color="#1d9bf0" />
       <h1 class="text-base font-bold ml-2">
@@ -73,25 +73,6 @@ const handleRemoveKeyword = (index: number) => {
       <h3 class="text-sm font-bold">
         Options
       </h3>
-      <div class="mt-1 flex gap-2">
-        <input
-          id="show-icon"
-          v-model="storageDemo.showFloatingIcon"
-          type="checkbox"
-          name="show-icon"
-        >
-        <label for="show-icon">Show floating icon</label>
-      </div>
-
-      <div class="mt-1 flex gap-2">
-        <input
-          id="hide-tweet"
-          v-model="storageDemo.hideTweetCompletely"
-          type="checkbox"
-          name="hide-tweet"
-        >
-        <label for="hide-tweet">Hide matched tweet completely</label>
-      </div>
 
       <div class="mt-1 flex gap-2">
         <input
@@ -105,22 +86,12 @@ const handleRemoveKeyword = (index: number) => {
 
       <div class="mt-1 flex gap-2">
         <input
-          id="hide-ads"
-          v-model="storageDemo.hideTwitterAdsCompletely"
-          type="checkbox"
-          name="hide-ads"
-        >
-        <label for="hide-ads">Hide Ads completely</label>
-      </div>
-
-      <div class="mt-1 flex gap-2">
-        <input
           id="hide-follow-people"
           v-model="storageDemo.hidePeopleToFollowSuggestion"
           type="checkbox"
           name="hide-follow-people"
         >
-        <label for="hide-follow-people">Hide People to follow suggestions</label>
+        <label for="hide-follow-people">Hide "People to follow" suggestions</label>
       </div>
 
       <div class="mt-1 flex gap-2">
@@ -130,9 +101,40 @@ const handleRemoveKeyword = (index: number) => {
           type="checkbox"
           name="hide-subscribe"
         >
-        <label for="hide-subscribe">Hide Subscribe suggestions</label>
+        <label for="hide-subscribe">Hide "Subscribe" suggestions</label>
       </div>
-      <!-- Hide ads completely -->
+
+      <hr class="my-2">
+
+      <div class="mt-1 flex gap-2">
+        <input
+          id="show-icon"
+          v-model="storageDemo.showFloatingIcon"
+          type="checkbox"
+          name="show-icon"
+        >
+        <label for="show-icon">Show floating icon</label>
+      </div>
+
+      <div class="mt-1 flex gap-2">
+        <input
+          id="hide-tweet"
+          v-model="storageDemo.showPlaceholderForHiddenTweet"
+          type="checkbox"
+          name="hide-tweet"
+        >
+        <label for="hide-tweet">Show Placeholder When Tweet is Hidden</label>
+      </div>
+
+      <div class="mt-1 flex gap-2">
+        <input
+          id="hide-ads"
+          v-model="storageDemo.showPlaceholderForHiddenAds"
+          type="checkbox"
+          name="hide-ads"
+        >
+        <label for="hide-ads">Show Placeholder When Ad/suggestion is Hidden </label>
+      </div>
     </div>
   </main>
 </template>
