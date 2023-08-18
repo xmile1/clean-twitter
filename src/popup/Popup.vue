@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storageDemo } from '~/logic/storage'
-import IconDeleteVariant from '~icons/mdi/delete-variant'
+import IconClean from '~icons/carbon/clean'
 import { useAddKeyword } from '~/composables/useAddKeyword'
 
 const newKeyword = ref('')
@@ -19,9 +19,9 @@ const handleRemoveKeyword = (index: number) => {
 <template>
   <main class="w-[300px] text-gray-700">
     <div class="px-6 py-4 flex items-center">
-      <IconDeleteVariant class="text-xl" />
+      <IconClean class="text-xl" color="#1d9bf0" />
       <h1 class="text-base font-bold ml-2">
-        Clean twitter
+        Clean twitter (X.com)
       </h1>
     </div>
 
