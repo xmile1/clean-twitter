@@ -1,6 +1,6 @@
-const createHiddenTweetElement = () => {
+const createHiddenTweetElement = (typeOfTweet: string) => {
   const hiddenTweet = document.createElement('div')
-  hiddenTweet.innerText = 'Tweet hidden by Clean Twitter. (Click to view tweet)'
+  hiddenTweet.innerText = `${typeOfTweet} hidden by Clean Twitter. (Click to view tweet)`
   hiddenTweet.style.color = 'grey'
   hiddenTweet.style.padding = '8px 8px 8px 32px'
   hiddenTweet.style.fontFamily = 'TwitterChirp'
@@ -17,8 +17,10 @@ const showTweet = (element: HTMLElement, nextSibling: HTMLElement | null) => {
   }
 }
 
-export const hideTweet = (element: HTMLElement, showPlaceholderForHiddenTweet: boolean) => {
+export const hideTweet = (element: HTMLElement, showPlaceholderForHiddenTweet: boolean, typeOfTweet: string) => {
   const nextSibling = element.nextSibling as HTMLElement | null
+  if (element.style.height === '30px' || element.style.height === '0px')
+    return
 
   element.style.height = showPlaceholderForHiddenTweet ? '30px' : '0px'
   element.style.overflow = 'hidden'
@@ -28,7 +30,7 @@ export const hideTweet = (element: HTMLElement, showPlaceholderForHiddenTweet: b
     nextSibling.style.overflow = 'hidden'
   }
 
-  const hiddenTweet = createHiddenTweetElement()
+  const hiddenTweet = createHiddenTweetElement(typeOfTweet)
 
   hiddenTweet.addEventListener('click', () => {
     showTweet(element, nextSibling)
