@@ -1,10 +1,10 @@
 {
   "name": "clean-twitter",
-  "displayName": "Clean Twitter",
-  "version": "0.0.1",
+  "displayName": "Clean Twitter/X.com (Hide Tweets,Ads,etc)",
+  "version": "1.0.0",
   "private": true,
   "packageManager": "pnpm@8.3.1",
-  "description": "A browser extension that filters out unwanted tweets.",
+  "description": "A browser extension that filters out unwanted tweets. (Hides tweet by keywords, Hides ads, etc)",
   "scripts": {
     "dev": "npm run clear && cross-env NODE_ENV=development run-p dev:*",
     "dev-firefox": "npm run clear && cross-env NODE_ENV=development EXTENSION=firefox run-p dev:*",

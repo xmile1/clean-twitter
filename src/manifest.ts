@@ -33,7 +33,7 @@ export async function getManifest() {
       128: './assets/icon-512.png',
     },
     permissions: ['storage'],
-    host_permissions: ['*://*/*'],
+    // host_permissions: ['*://*/*'],
     content_scripts: [
       {
         matches: ['https://twitter.com/*', 'https://x.com/*'],

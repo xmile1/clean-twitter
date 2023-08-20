@@ -1,6 +1,6 @@
-# Filter Twitter/X.com Threads (Hide Tweets by keywords, Hide Ads, etc.)
+# Clean Twitter/X.com (Hide Tweets by keywords, Hide Ads, etc.)
 
-Filter Twitter/X.com Threads is a browser extension designed to enhance your Twitter browsing experience. It allows you to hide tweets in Twitter threads that contain specified keywords. Additionally, it provides options to hide Ad tweets and suggestions for who to follow or subscribe to.
+Clean Twitter/X.com is a browser extension designed to enhance your Twitter browsing experience. It allows you to hide tweets in Twitter threads that contain specified keywords. Additionally, it provides options to hide Ad tweets and suggestions for who to follow or subscribe to.
 
 
 Key Features
