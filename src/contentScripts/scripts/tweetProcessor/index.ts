@@ -14,10 +14,10 @@ function observeTweets(element: Element, options: any): void {
   const observer = new MutationObserver((mutations: MutationRecord[]) => {
     mutations.forEach((mutation: MutationRecord) => {
       mutation.addedNodes.forEach((node: Node) => {
-        if (
-          node.nodeType === Node.ELEMENT_NODE
-            && (node as Element).matches('[data-testid="cellInnerDiv"]')
-        )
+        const isInTimelineView = (node as Element).closest('[aria-label="Timeline: Your Home Timeline"]')
+        const isTweetSection = (node as Element).matches('[data-testid="cellInnerDiv"]')
+
+        if (node.nodeType === Node.ELEMENT_NODE && isTweetSection && isInTimelineView)
           processTweet(node as HTMLElement, options)
       })
     })
@@ -30,9 +30,7 @@ function observeTweets(element: Element, options: any): void {
   observer.observe(element, { childList: true, subtree: true })
 }
 
-export async function initializeTweetObserver(
-  options: any,
-): Promise<void> {
+export async function initializeTweetObserver(options: any): Promise<void> {
   const tweetsContainer = await getTweetsContainer()
   tweetsContainer
     .querySelectorAll('[data-testid="cellInnerDiv"]')
