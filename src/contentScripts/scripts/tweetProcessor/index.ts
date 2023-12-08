@@ -19,8 +19,9 @@ function observeTweets(element: Element, options: any): void {
           'verified_followers',
           'followers_you_follow',
           'following',
+          'search',
         ]
-        const urlPath = location.href.split('/').pop() as string
+        const urlPath = location.href.split('/').pop()?.replace(/\?.*$/, '') ?? ''
         const isExcludedPath = excludedPaths.includes(urlPath)
         const isTweetSection = (node as Element).matches('[data-testid="cellInnerDiv"]')
 
